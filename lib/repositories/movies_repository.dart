@@ -13,7 +13,7 @@ class MoviesRepository {
     List<Movie> movies;
 
     movies = data.map((e) => Movie.fromMap(e)).toList();
-    return movies.getRange(skip, limit).toList();
+    return movies.getRange(skip, skip + limit).toList();
   }
 
   final String _jsonData = '''

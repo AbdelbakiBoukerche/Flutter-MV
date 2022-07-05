@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
   /// 0 : List
   /// 1 : Table
   /// 2 : Tree
-  int _currentView = 0;
+  int _currentView = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +22,13 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          splashRadius: 25.0,
+          onPressed: () {
+            model.fetchMore();
+          },
+          icon: const Icon(Icons.add),
+        ),
         title: const Text('Flutter Model/View Pattern'),
         centerTitle: true,
         actions: [
@@ -69,8 +76,21 @@ class _HomeState extends State<Home> {
         },
       );
     } else if (_currentView == 1) {
-      return FTableView(model: model);
+      return SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: FTableView(
+          showCheckboxColumn: false,
+          model: model,
+          rowsPerPage: 10,
+          onTap: (modelIndex) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(SnackBar(content: Text("${modelIndex.data()} ")));
+          },
+        ),
+      );
     } else {
+      // Tree View WIP
       return const Text("Tree");
     }
   }

@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart' show ChangeNotifier;
+
 import './f_model_index.dart';
 
 enum FOrientation { horizontal, vertical }
 
-abstract class FAbstractItemModel {
+abstract class FAbstractItemModel extends ChangeNotifier {
   int rowCount() => 0;
   int columnCount() => 0;
 
@@ -27,4 +29,8 @@ abstract class FAbstractItemModel {
       null;
 
   dynamic data(FModelIndex index) => null;
+
+  dynamic fetchMore() {
+    notifyListeners();
+  }
 }

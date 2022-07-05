@@ -44,7 +44,7 @@ class MoviesModel extends FAbstractItemModel {
       case 1:
         return data.title;
       case 2:
-        return data.description;
+        return data.description ?? "N/A";
       case 3:
         return data.imageURL ?? "";
       case 4:
@@ -52,5 +52,11 @@ class MoviesModel extends FAbstractItemModel {
       default:
         return null;
     }
+  }
+
+  @override
+  fetchMore() {
+    _data.addAll(MoviesRepository.instance.fetchMovies(_data.length));
+    return super.fetchMore();
   }
 }

@@ -6,15 +6,13 @@ import '../f_model_index.dart';
 
 class FListView extends FAbstractItemView {
   const FListView({
-    Key? key,
-    required FAbstractItemModel model,
+    super.key,
+    required super.model,
     this.padding = const EdgeInsets.all(8.0),
-    this.onTap,
-  }) : super(key: key, model: model);
+    super.onTap,
+  });
 
   final EdgeInsetsGeometry padding;
-
-  final Function(FModelIndex)? onTap;
 
   @override
   State<StatefulWidget> createState() => _FListViewState();
