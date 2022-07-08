@@ -9,17 +9,18 @@ abstract class FAbstractItemModel extends ChangeNotifier {
   int columnCount() => 0;
 
   bool checkIndex(FModelIndex index) {
-    if (index.isValid() && index.model == this) {
-      return true;
+    if (!index.isValid() ||
+        index.model != this ||
+        index.row > rowCount() ||
+        index.column > columnCount()) {
+      return false;
     }
-    return false;
+
+    return true;
   }
 
-  FModelIndex? createIndex(int row, int column, {FModelIndex? parent}) {
-    FModelIndex index = FModelIndex(row, column, this, parent);
-    if (!index.isValid()) return null;
-
-    return index;
+  FModelIndex createIndex(int row, int column, {FModelIndex? parent}) {
+    return FModelIndex(row, column, this, parent);
   }
 
   dynamic headerData(

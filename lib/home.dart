@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
   /// 0 : List
   /// 1 : Table
   /// 2 : Tree
-  int _currentView = 1;
+  int _currentView = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class _HomeState extends State<Home> {
         child: FTableView(
           showCheckboxColumn: false,
           model: model,
-          rowsPerPage: 10,
+          rowsPerPage: 5,
           onTap: (modelIndex) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
@@ -90,8 +90,7 @@ class _HomeState extends State<Home> {
         ),
       );
     } else {
-      // Tree View WIP
-      return const Text("Tree");
+      return const Text("Tree View");
     }
   }
 }

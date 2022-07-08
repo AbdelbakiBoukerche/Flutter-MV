@@ -8,14 +8,86 @@ class MoviesRepository {
   static final MoviesRepository instance = MoviesRepository._();
 
   List<Movie> fetchMovies([int skip = 0, int limit = 50]) {
-    List<dynamic> data = jsonDecode(_jsonData);
+    List<dynamic> data = jsonDecode(_jsonData2);
 
     List<Movie> movies;
 
     movies = data.map((e) => Movie.fromMap(e)).toList();
-    return movies.getRange(skip, skip + limit).toList();
+    return movies.skip(skip).take(skip + limit).toList();
   }
 
+  final String _jsonData2 = '''
+    [
+  {
+    "id": 1,
+    "title": "Fantastic Beasts and Where to Find Them",
+    "rating": 7.2,
+    "serie": "fantastic_beasts"
+  },
+  {
+    "id": 2,
+    "title": "Fantastic Beasts: The Crimes of Grindelwald",
+    "rating": 6.5,
+    "serie": "fantastic_beasts"
+  },
+  {
+    "id": 3,
+    "title": "Fantastic Beasts: The Secrets of Dumbledore",
+    "rating": 6.2,
+    "serie": "fantastic_beasts"
+  },
+  {
+    "id": 4,
+    "title": "Harry Potter and the Philosopher's Stone",
+    "rating": 7.6,
+    "serie": "harry_potter"
+  },
+  {
+    "id": 5,
+    "title": "Harry Potter and the Chamber of Secrets",
+    "rating": 7.4,
+    "serie": "harry_potter"
+  },
+  {
+    "id": 6,
+    "title": "Harry Potter and the Prisoner of Azkaban",
+    "rating": 7.9,
+    "serie": "harry_potter"
+  },
+  {
+    "id": 7,
+    "title": "Harry Potter and the Goblet of Fire",
+    "rating": 7.7,
+    "serie": "harry_potter"
+  },
+  {
+    "id": 8,
+    "title": "Harry Potter and the Order of the Phoenix",
+    "rating": 7.5,
+    "serie": "harry_potter"
+  },
+  {
+    "id": 9,
+    "title": "Harry Potter and the Half-Blood Prince",
+    "rating": 7.6,
+    "serie": "harry_potter"
+  },
+  {
+    "id": 10,
+    "title": "Harry Potter and the Deathly Hallows: Part 1",
+    "rating": 7.7,
+    "serie": "harry_potter"
+  },
+  {
+    "id": 11,
+    "title": "Harry Potter and the Deathly Hallows: Part 2",
+    "rating": 8.1,
+    "serie": "harry_potter"
+  }
+]
+  ''';
+
+  // ignore: unused_field
   final String _jsonData = '''
   [{"id":1,"title":"Bat*21","description":"Sed vel enim sit amet nunc viverra dapibus.","imageURL":null,"rating":5},
   {"id":2,"title":"Not Suitable for Children","description":null,"imageURL":null,"rating":2},

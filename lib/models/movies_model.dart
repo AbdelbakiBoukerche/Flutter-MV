@@ -36,9 +36,9 @@ class MoviesModel extends FAbstractItemModel {
   dynamic data(FModelIndex index) {
     if (!index.isValid()) return null;
 
-    Movie data = _data[index.row!];
+    Movie data = _data[index.row];
 
-    switch (index.column!) {
+    switch (index.column) {
       case 0:
         return data.id;
       case 1:
@@ -48,7 +48,7 @@ class MoviesModel extends FAbstractItemModel {
       case 3:
         return data.imageURL ?? "";
       case 4:
-        return data.rating != null ? "${data.rating}/5" : "N/A";
+        return data.rating != null ? "${data.rating}/10" : "N/A";
       default:
         return null;
     }

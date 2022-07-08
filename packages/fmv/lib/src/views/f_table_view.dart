@@ -68,7 +68,7 @@ class FTableView extends FAbstractItemView {
     this.checkboxHorizontalMargin,
     this.controller,
     this.primary,
-  })  : assert(actions == null || (actions != null && header != null)),
+  })  : assert(actions == null || header != null),
         assert(model.columnCount() != 0),
         assert(sortColumnIndex == null ||
             (sortColumnIndex >= 0 && sortColumnIndex < model.columnCount())),
@@ -530,6 +530,7 @@ class _FTableViewState extends State<FTableView> {
       cells: _getRowCells(row),
       onSelectChanged: (_) {
         var modelIndex = FModelIndex(row, 1, model);
+        if (!modelIndex.isValid()) return;
         widget.onTap?.call(modelIndex);
       },
     );
@@ -539,12 +540,13 @@ class _FTableViewState extends State<FTableView> {
     final List<DataCell> result = <DataCell>[];
     for (int col = 0; col < model.columnCount(); col++) {
       DataCell? cell;
-      FModelIndex? index = model.createIndex(row, col);
-      if (index == null) {
+      FModelIndex index = model.createIndex(row, col);
+
+      if (!index.isValid()) {
         cell ??= DataCell.empty;
       }
       cell ??= DataCell(
-        Text("${index!.data()}"),
+        Text("${index.data()}"),
       );
       result.add(cell);
     }
@@ -569,6 +571,7 @@ class _FTableViewState extends State<FTableView> {
       cells: cells,
       onSelectChanged: (_) {
         var modelIndex = FModelIndex(index, 1, model);
+        if (!modelIndex.isValid()) return;
         widget.onTap?.call(modelIndex);
       },
     );
@@ -580,10 +583,6 @@ class _FTableViewState extends State<FTableView> {
       cells: _columns
           .map<DataCell>((DataColumn column) => DataCell.empty)
           .toList(),
-      onSelectChanged: (_) {
-        var modelIndex = FModelIndex(index, 1, model);
-        widget.onTap?.call(modelIndex);
-      },
     );
   }
 }

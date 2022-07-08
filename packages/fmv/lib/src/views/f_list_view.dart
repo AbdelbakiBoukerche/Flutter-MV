@@ -8,8 +8,8 @@ class FListView extends FAbstractItemView {
   const FListView({
     super.key,
     required super.model,
-    this.padding = const EdgeInsets.all(8.0),
     super.onTap,
+    this.padding = const EdgeInsets.all(8.0),
   });
 
   final EdgeInsetsGeometry padding;
@@ -26,7 +26,7 @@ class _FListViewState extends State<FListView> {
     return ListView.builder(
       itemCount: model.rowCount(),
       itemBuilder: (BuildContext context, int row) {
-        var index = FModelIndex(row, 1, model);
+        FModelIndex index = model.createIndex(row, 1);
 
         return InkWell(
           child: Padding(

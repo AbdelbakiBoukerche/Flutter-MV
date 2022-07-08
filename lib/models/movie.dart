@@ -13,7 +13,7 @@ class Movie {
   final String title;
   final String? description;
   final String? imageURL;
-  final int? rating;
+  final double? rating;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -32,7 +32,7 @@ class Movie {
       description:
           map['description'] != null ? map['description'] as String : null,
       imageURL: map['imageURL'] != null ? map['imageURL'] as String : null,
-      rating: map['rating'] != null ? map['rating'] as int : null,
+      rating: map['rating'] != null ? map['rating'] as double : null,
     );
   }
 
